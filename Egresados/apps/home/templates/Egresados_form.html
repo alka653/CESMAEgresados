@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% block content %}
+	<div class="background"></div>
+	<div class="form-egresado">
+		<div class="container">
+			<div class="row justify-content-md-center">
+				<div class="col-md-7">
+					<div class="box">
+						<h2>¿Eres egresado? Ingresa los siguientes datos</h2>
+						<form action="{% url 'crear_egresados' %}" method="POST">
+							{% csrf_token %}
+							{% for item in form %}
+								<div class="form-group">
+									<label>{{ item.label }}</label>
+									{{ item }}
+								</div>
+							{% endfor %}
+							<div class="form-group text-center">
+								<button type="submit" class="btn btn-block btn-primary">Enviar</button>
+								{% if user %}
+									<br>
+									<hr>
+									<small>
+										<a href="{% url 'lista_egresados' %}">Lista de egresados</a>
+									</small>
+								{% endif %}
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock content %}

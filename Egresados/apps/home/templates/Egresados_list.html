@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% block content %}
+	<div class="background"></div>
+	<div class="container">
+		<div class="row justify-content-md-center">
+			<div class="col-md-12">
+				<div class="box" >
+					<table class="table table-hover">
+						<thead>
+							<tr>
+								<th>Nombres</th>
+								<th>Apellidos</th>
+								<th>Promoción</th>
+								<th>Teléfono</th>
+								<th>Dirección</th>
+								<th>Correo electrónico</th>
+								<th>Últimos estudios</th>
+								<th>Último lugar estudiado</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for egresado in object_list %}
+								<tr>
+									<td>{{ egresado.nombres }}</td>
+									<td>{{ egresado.apellidos }}</td>
+									<td>{{ egresado.promocion }}</td>
+									<td>{{ egresado.telefono }}</td>
+									<td>{{ egresado.direccion }}</td>
+									<td>{{ egresado.correo_electronico }}</td>
+									<td>{{ egresado.ultimos_estudios }}</td>
+									<td>{{ egresado.lugar_ultimo_estudio }}</td>
+								</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock content %}

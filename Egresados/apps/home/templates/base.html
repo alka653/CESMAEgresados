@@ -1,0 +1,26 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8">
+		<title>Egresados :: {{ title }}</title>
+		<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+		<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+		<link rel="stylesheet" href="{% static 'css/styles.min.css' %}">
+		<script src="{% static 'js/jquery.min.js' %}"></script>
+		<script src="{% static 'js/bootstrap.min.js' %}"></script>
+		{% block content_head %}{% endblock content_head %}
+	</head>
+	<body>
+		{% block content %}{% endblock content %}
+		<div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"></div>
+		<script>
+			$(document).on('keypress', '.only-number', function(e){
+				if(e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)){
+					return false
+				}
+			})
+			{% block content_script %}{% endblock content_script %}
+		</script>
+	</body>
+</html>
