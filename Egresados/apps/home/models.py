@@ -9,3 +9,9 @@ class Egresados(models.Model):
 	correo_electronico = models.CharField(max_length=40)
 	ultimos_estudios = models.CharField(max_length=40)
 	lugar_ultimo_estudio = models.CharField(max_length=80)
+
+	def __str__(self):
+		return self.nombres+' - '+self.apellidos+' - '+self.promocion
+
+	def __unicode__(self):
+		return self.nombres+' - '+self.apellidos+' - '+self.promocion

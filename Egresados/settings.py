@@ -56,7 +56,7 @@ ROOT_URLCONF = 'Egresados.urls'
 TEMPLATES = [
 	{
 		'BACKEND': 'django.template.backends.django.DjangoTemplates',
-		'DIRS': [os.path.join(os.path.dirname(__file__),'templates'),],
+		'DIRS': ['Egresados/apps/home/templates'],
 		'APP_DIRS': True,
 		'OPTIONS': {
 			'context_processors': [
