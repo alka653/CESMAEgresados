@@ -29,3 +29,11 @@ class EgresadosForm(forms.ModelForm):
 			'ultimos_estudios': forms.TextInput(attrs={'class':'form-control', 'required': True}),
 			'lugar_ultimo_estudio': forms.TextInput(attrs={'class':'form-control', 'required': True}),
 		}
+
+class EgresadoSearchForm(forms.Form):
+	buscar_por = forms.CharField(label = 'Buscar por:', widget = forms.TextInput(attrs = {'class': 'form-control', 'placeholder': 'Digite palabra a buscar'}))
+
+	def __init__(self, *args, **kwargs):
+		buscar_por = kwargs.pop('buscar_por', None)
+		super(EgresadoSearchForm, self).__init__(*args, **kwargs)
+		if buscar_por: self.fields['buscar_por'].initial = buscar_por

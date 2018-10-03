@@ -11,6 +11,18 @@
 					<div style="text-align: center">
 						<a href="/admin">Administración</a>
 					</div>
+					<form action="{% url 'lista_egresados' %}" method="GET">
+						<div class="row">
+							{% for forms in form %}
+								<div class="form-group col-md-12">
+									{{ forms }}
+								</div>
+							{% endfor %}
+							<div class="form-group text-center col-md-12">
+								<button type="submit" class="btn btn-success">Buscar</button>
+							</div>
+						</div>
+					</form>
 					<table class="table table-hover">
 						<thead>
 							<tr>
