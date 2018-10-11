@@ -3,11 +3,14 @@
 {% load static %}
 
 {% block branding %}
-     <div class="head">
-          <h1 id="name">Administración CESMA Egresados</h1>
-     </div>
+	<div class="head">
+		<h1 id="name">Administración CESMA Egresados</h1>
+	</div>
 {% endblock %}
 
 {% block nav-global %}
-     <img class="brand_img" src="{% static 'img/EspirituSanto.png'%}" width="50" height="50" alt="logo">
+	<img class="brand_img" src="{% static 'img/EspirituSanto.jpg'%}" width="50" height="50" alt="logo">
+	<div id="user-tools">
+		<a href="{% url 'crear_egresados' %}" id="user-tools" style="border-bottom: none;">Nuevo egresado</a>
+	</div>
 {% endblock %}

@@ -9,7 +9,7 @@
 			<div class="col-md-12">
 				<div class="box">
 					<div style="text-align: center">
-						<a href="/admin">Administración</a>
+						<a href="/">Administración</a>
 					</div>
 					<form action="{% url 'lista_egresados' %}" method="GET">
 						<div class="row">
@@ -34,6 +34,7 @@
 								<th>Correo electrónico</th>
 								<th>Últimos estudios</th>
 								<th>Último lugar estudiado</th>
+								<th></th>
 							</tr>
 						</thead>
 						<tbody>
@@ -47,6 +48,10 @@
 									<td>{{ egresado.correo_electronico }}</td>
 									<td>{{ egresado.ultimos_estudios }}</td>
 									<td>{{ egresado.lugar_ultimo_estudio }}</td>
+									<td>
+										<a href="/home/egresados/{{ egresado.id }}/change/">Editar</a>
+										<a href="/home/egresados/{{ egresado.id }}/delete/">Eliminar</a>
+									</td>
 								</tr>
 							{% endfor %}
 						</tbody>
