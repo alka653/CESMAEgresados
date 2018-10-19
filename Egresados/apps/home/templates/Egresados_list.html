@@ -30,7 +30,7 @@
 							</div>
 						</form>
 						<div class="table-responsive">
-							<table data-toggle="table">
+							<table data-toggle="table" data-pagination="true" data-locale="es-MX">
 								<thead>
 									<tr>
 										<th data-sortable="true" data-field="numero_documento">Número de documento</th>
@@ -75,6 +75,7 @@
 
 {% block content_script %}
 	<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.12.1/bootstrap-table.min.js"></script>
+	<script src="{% static 'js/bootstrap-table-es-MX.js' %}" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript">
 		$('.table').bootstrapTable()
 	</script>
