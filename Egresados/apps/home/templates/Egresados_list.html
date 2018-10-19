@@ -2,62 +2,80 @@
 
 {% load staticfiles %}
 
+{% block content_head %}
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.12.1/bootstrap-table.min.css">
+{% endblock content_head %}
+
 {% block content %}
 	<div class="background"></div>
-	<div class="container">
-		<div class="row justify-content-md-center">
-			<div class="col-md-12">
-				<div class="box">
-					<div style="text-align: center">
-						<a href="/">Administración</a>
-					</div>
-					<form action="{% url 'lista_egresados' %}" method="GET">
-						<div class="row">
-							{% for forms in form %}
-								<div class="form-group col-md-12">
-									{{ forms }}
-								</div>
-							{% endfor %}
-							<div class="form-group text-center col-md-12">
-								<button type="submit" class="btn btn-success">Buscar</button>
-							</div>
+	<div class="form-egresado">
+		<div class="container">
+			<div class="row justify-content-md-center">
+				<div class="col-md-12">
+					<div class="box">
+						<div style="text-align: center">
+							<a href="/admin">Administración</a>
 						</div>
-					</form>
-					<table class="table table-hover">
-						<thead>
-							<tr>
-								<th>Nombres</th>
-								<th>Apellidos</th>
-								<th>Promoción</th>
-								<th>Teléfono</th>
-								<th>Dirección</th>
-								<th>Correo electrónico</th>
-								<th>Últimos estudios</th>
-								<th>Último lugar estudiado</th>
-								<th></th>
-							</tr>
-						</thead>
-						<tbody>
-							{% for egresado in object_list %}
-								<tr>
-									<td>{{ egresado.nombres }}</td>
-									<td>{{ egresado.apellidos }}</td>
-									<td>{{ egresado.promocion }}</td>
-									<td>{{ egresado.telefono }}</td>
-									<td>{{ egresado.direccion }}</td>
-									<td>{{ egresado.correo_electronico }}</td>
-									<td>{{ egresado.ultimos_estudios }}</td>
-									<td>{{ egresado.lugar_ultimo_estudio }}</td>
-									<td>
-										<a href="/admin/home/egresados/{{ egresado.id }}/change/">Editar</a>
-										<a href="/admin/home/egresados/{{ egresado.id }}/delete/">Eliminar</a>
-									</td>
-								</tr>
-							{% endfor %}
-						</tbody>
-					</table>
+						<form action="{% url 'lista_egresados' %}" method="GET">
+							<div class="row">
+								{% for forms in form %}
+									<div class="form-group col-md-12">
+										{{ forms }}
+									</div>
+								{% endfor %}
+								<div class="form-group text-center col-md-12">
+									<button type="submit" class="btn btn-success">Buscar</button>
+									<a href="{% url 'listado_egresado' %}" class="btn btn-info">Imprimir listado</a>
+								</div>
+							</div>
+						</form>
+						<div class="table-responsive">
+							<table data-toggle="table">
+								<thead>
+									<tr>
+										<th data-sortable="true" data-field="numero_documento">Número de documento</th>
+										<th data-sortable="true" data-field="nombre">Nombres</th>
+										<th data-sortable="true" data-field="apellido">Apellidos</th>
+										<th data-sortable="true" data-field="promocion">Promoción</th>
+										<th data-sortable="true" data-field="telefono">Teléfono</th>
+										<th data-sortable="true" data-field="direccion">Dirección</th>
+										<th data-sortable="true" data-field="email">Correo electrónico</th>
+										<th data-sortable="true" data-field="ultimo_estudio">Últimos estudios</th>
+										<th data-sortable="true" data-field="ultimo_lugar">Último lugar estudiado</th>
+										<th></th>
+									</tr>
+								</thead>
+								<tbody>
+									{% for egresado in object_list %}
+										<tr>
+											<td>{{ egresado.numero_documento }}</td>
+											<td>{{ egresado.nombres }}</td>
+											<td>{{ egresado.apellidos }}</td>
+											<td>{{ egresado.promocion }}</td>
+											<td>{{ egresado.telefono }}</td>
+											<td>{{ egresado.direccion }}</td>
+											<td>{{ egresado.correo_electronico }}</td>
+											<td>{{ egresado.ultimos_estudios }}</td>
+											<td>{{ egresado.lugar_ultimo_estudio }}</td>
+											<td>
+												<a href="/admin/home/egresados/{{ egresado.id }}/change/">Editar</a>
+												<a href="/admin/home/egresados/{{ egresado.id }}/delete/">Eliminar</a>
+											</td>
+										</tr>
+									{% endfor %}
+								</tbody>
+							</table>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 {% endblock content %}
+
+{% block content_script %}
+	<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.12.1/bootstrap-table.min.js"></script>
+	<script type="text/javascript">
+		$('.table').bootstrapTable()
+	</script>
+{% endblock content_script %}

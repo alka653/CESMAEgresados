@@ -9,8 +9,13 @@
 			<div class="row justify-content-md-center">
 				<div class="col-md-7">
 					<div class="box">
-						<h2>¿Eres egresado? Ingresa los siguientes datos</h2>
-						<form action="{% url 'crear_egresados' %}" method="POST">
+						{% for message in messages %}
+							<div class="alert alert-{{ message.tags }}">
+								{{ message|safe }}
+							</div>
+						{% endfor %}
+						<h2>{{ title_form }}</h2>
+						<form action="{{ url }}" method="POST">
 							{% csrf_token %}
 							{% for item in form %}
 								<div class="form-group">

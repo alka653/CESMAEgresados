@@ -12,6 +12,7 @@ class EgresadosForm(forms.ModelForm):
 		labels = {
 			'nombres': 'Nombres:',
 			'apellidos': 'Apellidos:',
+			'numero_documento': 'Numero de identidad',
 			'promocion': 'Promocion:',
 			'telefono': 'Telefono:',
 			'direccion': 'Direccion:',
@@ -22,6 +23,7 @@ class EgresadosForm(forms.ModelForm):
 		widgets = {
 			'nombres': forms.TextInput(attrs={'class':'form-control', 'required': True}),
 			'apellidos': forms.TextInput(attrs={'class':'form-control', 'required': True}),
+			'numero_documento': forms.TextInput(attrs={'class':'form-control only-number', 'required': True}),
 			'promocion': forms.TextInput(attrs={'class':'form-control only-number', 'required': True}),
 			'telefono': forms.TextInput(attrs={'class':'form-control only-number', 'required': True}),
 			'direccion': forms.TextInput(attrs={'class':'form-control', 'required': True}),

@@ -1,0 +1,48 @@
+{% extends "easy_pdf/base.html" %}
+
+{% block extra_style %}
+	<style type="text/css">
+		@page { size: letter landscape; margin: 1cm; }
+		body {
+			font-family: "Helvetica", "sans-serif";
+			color: #2d3436;
+			font-size: 12px;
+		}
+		.content{
+			text-align: center;
+		}
+		table{
+			text-align: center;
+		}
+	</style>
+{% endblock %}
+
+{% block content %}
+	<div class="content">
+		<h1>Reporte de egresados</h1>
+	</div>
+	<table class="table text-center">
+		<thead>
+			<tr>
+				<th>Numero de documento</th>
+				<th>Nombres</th>
+				<th>Apellidos</th>
+				<th>Promocion</th>
+				<th>Telefono</th>
+				<th>Email</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for egresado in query %}
+				<tr style="border-top: 1px solid grey; border-bottom: 1px solid grey; padding: 5px 0px;">
+					<td>{{ egresado.numero_documento }}</td>
+					<td>{{ egresado.nombres }}</td>
+					<td>{{ egresado.apellidos }}</td>
+					<td>{{ egresado.promocion }}</td>
+					<td>{{ egresado.telefono }}</td>
+					<td>{{ egresado.correo_electronico }}</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+{% endblock %}
