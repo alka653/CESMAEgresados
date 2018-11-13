@@ -24,6 +24,7 @@
 								</div>
 							{% endfor %}
 							<div class="form-group text-center">
+								<div class="g-recaptcha" data-sitekey="6LdTlnoUAAAAAO_hpNlXFBepn9Q1-eNXNUx2VahK"></div>
 								<button type="submit" class="btn btn-block btn-primary">Enviar</button>
 								{% if user %}
 									<br>
@@ -39,4 +40,13 @@
 			</div>
 		</div>
 	</div>
+	<script src='https://www.google.com/recaptcha/api.js'></script>
+	<script>
+		grecaptcha.ready(function() {
+			grecaptcha.execute('6LdTlnoUAAAAAO_hpNlXFBepn9Q1-eNXNUx2VahK', {action: 'action_name'})
+			.then(function(token) {
+				alert('OE')
+			});
+		});
+</script>
 {% endblock content %}

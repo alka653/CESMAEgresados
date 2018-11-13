@@ -10,6 +10,8 @@ from django.db.models import Q
 from .models import Egresados
 from .forms import *
 
+# -*- coding: utf-8 -*-
+
 """
 def Egresados_view(request):
 	if request.method == 'POST':
@@ -36,7 +38,7 @@ class CreateEgresados(SuccessMessageMixin, CreateView):
 	def form_valid(self, form):
 		obj = form.save(commit = False)
 		if Egresados.objects.filter(numero_documento = obj.numero_documento).count() > 0:
-			messages.warning(self.request, 'Parece que ya estas registrado en la base de datos. Puedes <a href="'+reverse('actualizar_egresado', kwargs = {'numero_documento': obj.numero_documento})+'">Actualizar datos</a>')
+			messages.warning(self.request, 'Parece que ya estas registrado en la base de datos. Puedes dar <a href="'+reverse('actualizar_egresado', kwargs = {'numero_documento': obj.numero_documento})+'">clic aquí para actualizar datos</a>')
 			return super(CreateEgresados, self).form_invalid(form)
 		return super(CreateEgresados, self).form_valid(form)
 
@@ -64,6 +66,7 @@ class ListEgresados(FormMixin, ListView):
 	def get_form_kwargs(self):
 		kwargs = super(ListEgresados, self).get_form_kwargs()
 		kwargs['buscar_por'] = self.request.GET.get('buscar_por')
+		kwargs['promocion'] = self.request.GET.get('promocion')
 		return kwargs
 
 	def get_queryset(self):
@@ -71,12 +74,15 @@ class ListEgresados(FormMixin, ListView):
 		if self.request.GET.get('buscar_por') is not None:
 			find_by = self.request.GET.get('buscar_por')
 			queryset = queryset.filter(Q(numero_documento__icontains = find_by) | Q(nombres__icontains = find_by) | Q(apellidos__icontains = find_by) | Q(promocion__icontains = find_by) | Q(telefono__icontains = find_by) | Q(direccion__icontains = find_by) | Q(correo_electronico__icontains = find_by) | Q(ultimos_estudios__icontains = find_by) | Q(lugar_ultimo_estudio__icontains = find_by))
+		if self.request.GET.get('promocion') is not None and self.request.GET.get('promocion') != '':
+			queryset = queryset.filter(promocion = self.request.GET.get('promocion'))
 		return queryset
 
 class ImprimirListado(PDFTemplateView):
 	template_name = "pdf.html"
 
 	def get_context_data(self, **kwargs):
+		query = Egresados.objects.order_by('promocion', 'apellidos', 'nombres')
 		context = super(ImprimirListado, self).get_context_data(**kwargs)
-		context['query'] = Egresados.objects.all()
+		context['query'] = query.filter(promocion = self.request.GET.get('promocion')) if self.request.GET.get('promocion') != '' and self.request.GET.get('promocion') is not None else query
 		return context

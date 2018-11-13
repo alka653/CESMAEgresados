@@ -19,13 +19,13 @@
 						<form action="{% url 'lista_egresados' %}" method="GET">
 							<div class="row">
 								{% for forms in form %}
-									<div class="form-group col-md-12">
+									<div class="form-group col-md-6">
 										{{ forms }}
 									</div>
 								{% endfor %}
 								<div class="form-group text-center col-md-12">
 									<button type="submit" class="btn btn-success">Buscar</button>
-									<a href="{% url 'listado_egresado' %}" class="btn btn-info">Imprimir listado</a>
+									<button type="button" class="btn btn-info" onclick="printer()">Imprimir listado</button>
 								</div>
 							</div>
 						</form>
@@ -78,5 +78,6 @@
 	<script src="{% static 'js/bootstrap-table-es-MX.js' %}" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript">
 		$('.table').bootstrapTable()
+		printer = () => window.location.replace(`{% url 'listado_egresado' %}?promocion=${document.getElementById('id_promocion').value}`)
 	</script>
 {% endblock content_script %}
